@@ -17,10 +17,9 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="post" id="add-form" action="{{action('Payment\PayController@paymentPluginConfigAction')}}">
+                    <form method="post" id="add-form" action="{{route('admin.setting.mail')}}">
                         {{csrf_field()}}
-                        <input type="hidden" value="{{$payment}}" name="payment">
-                        <h6 class="heading-small text-muted mb-4">支付插件配置信息</h6>
+                        <h6 class="heading-small text-muted mb-4">邮件驱动配置信息</h6>
                         @if(!empty($form))
                             @foreach($form as $title=>$value)
                                 <div class="pl-lg-4">

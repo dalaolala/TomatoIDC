@@ -1,6 +1,6 @@
 # TomatoIDC虚拟主机销售系统
 
-![GPL3.0](https://badgen.net/badge/License/GPL-3.0/blue?icon=github)![PHP](https://badgen.net/badge/PHP/7.1.3+/orange)![Verison](https://badgen.net/badge/Verison/V0.1.2/cyan)![PHP](https://badgen.net/badge/版本/测试版/red)
+![GPL3.0](https://badgen.net/badge/License/GPL-3.0/blue?icon=github)![PHP](https://badgen.net/badge/PHP/7.1.3+/orange)![Verison](https://badgen.net/badge/Verison/V0.1.3/cyan)![PHP](https://badgen.net/badge/版本/测试版/red)
 
 [简体中文](https://github.com/MercyCloudTeam/TomatoIDC/blob/master/Readme.md)
 
@@ -24,6 +24,7 @@
 
 - 功能强大
 
+  - 支持邮件通知
   - 支持卡密充值
   - 支持多种支付方式
 
@@ -43,7 +44,7 @@ TomatoIDC是一款以[GPL3.0](https://opensource.org/licenses/gpl-3.0.html)协�
 
 
 
-目前版本V0.1.0只完成了基础功能，较多功能还在开放当中，目前版本为测试版，但是使用是完全没有问题的，更新改动可能较大。
+目前版本属于尝鲜版，较多功能还在开放当中，目前版本为测试版，但是使用是完全没有问题的，更新改动可能较大。
 
 
 
