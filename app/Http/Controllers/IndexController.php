@@ -22,6 +22,8 @@ class IndexController extends Controller
      * 视图代码View
      */
 
+    public $version = "V0.1.6";//发布版本号
+
     /**
      * 返回首页视图
      */
@@ -191,8 +193,8 @@ class IndexController extends Controller
         $hostController = new HostController();
         $payController = new PayController();
         $hosts = $hostController->autoCheckHostStatus();
-        $pay = $payController->autoCheckOrderStatus();
-        $hosts = null;
+        $order = $payController->autoCheckOrderStatus();
+        $recharge = $payController->autoCheckRechargeStatus();
         return time();
     }
 

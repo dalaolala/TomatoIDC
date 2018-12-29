@@ -14,7 +14,7 @@ class NilServerController extends Controller
 {
 
     public $diyConfigureFrom = false;//使用自定义表单
-    public $type = true; //服务器插件类型
+    public $type             = true; //服务器插件类型
 
     /**
      * 获取服务器状态 成功返回 接口值 失败返回false
@@ -35,15 +35,17 @@ class NilServerController extends Controller
      */
     public function createHost($server, $configure, $order)
     {
-                $host = HostModel::create([
-                    'order_id' => $order->id,
-                    'user_id' => $order->user_id,
-                    'host_name' => $order->good->title,
-                    'host_pass' => 'null',
-                    'host_panel' => 'null',
-                    'host_url' => 'null'
-                ]);
-                return $host;
+        $host = HostModel::create(
+            [
+                'order_id'   => $order->id,
+                'user_id'    => $order->user_id,
+                'host_name'  => $order->good->title,
+                'host_pass'  => 'null',
+                'host_panel' => 'null',
+                'host_url'   => 'null'
+            ]
+        );
+        return $host;
     }
 
     //TODO 获取主机信息
@@ -67,9 +69,9 @@ class NilServerController extends Controller
      * @param $host
      * @return bool
      */
-    public function openHost($server,$host)
+    public function openHost($server, $host)
     {
-       return $host;
+        return $host;
     }
 
     /**

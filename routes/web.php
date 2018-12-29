@@ -31,7 +31,8 @@ Route::middleware(['throttle:60,1','check.install.status'])->group(function () {
     Route::get('goods/show', 'IndexController@goodShowPage')->name('good.show');//商品列表Goods Show Page
     //User email　validate
     Route::get('user/email/validate/{id}/{token}','IndexController@userEmailTokenValidate')->where(['id' => '^[0-9]*$']);
-
+    //Diy page view
+    Route::get('page/{hash}','DiyPageController@indexPage')->name('diy_page');
 });
 
 Route::middleware(['guest','throttle:60,1'])->group(function (){
@@ -42,7 +43,7 @@ Route::middleware(['guest','throttle:60,1'])->group(function (){
     Route::get('register', 'IndexController@registerPage')->name('register');//注册视图 Register View
     Route::post('register', 'Auth\RegisterController@register');//注册操作 Register View
 });
-
+// wecaht/order/notify /alipay/order/notify /diy/order/notify
 Route::any('/{payment}/order/notify', 'Payment\PayController@notify');//支付回调
 Route::get('/temp/cron', "IndexController@tempCronAction");//临时监控
 
@@ -73,6 +74,12 @@ Route::prefix('admin')->group(function () {//管理路由
                 Route::get('show', 'AdminController@hostShowPage')->name('host.show');
                 //Recreate host action
                 Route::post('create/host/re', 'HostController@reCreateHost')->where(['id' => '^[0-9]*$']);
+                //Host Edit
+                Route::get('detailed/{id}','AdminController@hostDetailedPage')->where(['id' => '^[0-9]*$'])->name('host.detailed');
+                Route::post('detailed','HostController@hostEditAction');
+                //host manager
+                Route::post('open','HostController@openHost')->name('host.open');
+                Route::post('close','HostController@closeHost')->name('host.close');
             });
             Route::prefix('work/order')->group(function () { //工单 Work order
                 //show
@@ -108,13 +115,13 @@ Route::prefix('admin')->group(function () {//管理路由
                 //Goods categories del
                 Route::post('categories/del', 'GoodController@goodCategoriesDelAction')->name('good.categories.del');
                 //Goods configure add
-                Route::get('configure/add', 'AdminController@goodConfigureAddPage')->name('good.configure.add');
-                Route::post('configure/add', 'GoodController@goodConfigureAddAction');
+                Route::get('configure/add/{type}', 'AdminController@goodConfigureAddPage')->name('good.configure.add');
+                Route::post('configure/add', 'GoodConfigureController@goodConfigureAddAction');
                 //Goods configure del
-                Route::post('configure/del', 'GoodController@goodConfigureDelAction')->name('good.configure.del');
+                Route::post('configure/del', 'GoodConfigureController@goodConfigureDelAction')->name('good.configure.del');
                 //Goods configure edit
                 Route::get('configure/edit/{id}', 'AdminController@goodConfigureEditPage')->name('good.configure.edit')->where(['id' => '^[0-9]*$']);
-                Route::post('configure/edit', 'GoodController@goodConfigureEditAction');
+                Route::post('configure/edit', 'GoodConfigureController@goodConfigureEditAction');
                 //Goods add
                 Route::get('add', 'AdminController@goodAddPage')->name('good.add');
                 Route::post('add', 'GoodController@goodAddAction');
@@ -153,16 +160,28 @@ Route::prefix('admin')->group(function () {//管理路由
                 //Del
                 Route::post('del', 'ServerController@serverDelAction')->name('server.del');
             });
-            Route::prefix('prepaid/key')->group(function () {
+            Route::prefix('prepaid/key')->group(function () { //充值Key管理
                 //Show
                 Route::get('show','AdminController@prepaidKeyShowPage')->name('prepaid.key.show');
                 //Add
                 Route::get('add','AdminController@prepaidKeyAddPage')->name('prepaid.key.add');
                 Route::post('add','PrepaidKeyController@addKeyAction');
             });
-
-            //Email Test
+            Route::prefix('diy/page')->group(function(){ //自定义页面 管理
+                //show
+                Route::get('show', 'AdminController@diyPageShowPage')->name('diy.page.show');
+                //add
+                Route::get('add', 'AdminController@diyPageAddPage')->name('diy.page.add');
+                Route::post('add', 'DiyPageController@diyPageAddAction');
+                //edit
+                Route::get('edit/{hash}', 'AdminController@diyPageEditAction')->name('diy.page.edit');
+                Route::post('edit', 'DiyPageController@diyPageEditAction');
+                //del
+                Route::post('del', 'DiyPageController@diyPageDelAction')->name('diy.page.del');
+            });
+            //Test
             Route::get('email/show/{mailClassName}','MailDrive\UserMailController@emailViewTest');
+            Route::get('test/wechat/','Wechat\Message\Robot\TuringController@test');
         });
 
     });
@@ -193,6 +212,8 @@ Route::prefix('home')->group(function () {//首页路由
         //Host
         Route::get('host/show', 'HomeController@hostShowPage')->name('host.show');//host list view
         Route::get('host/detailed/{id}', 'HomeController@hostDetailedPage')->name('host.detailed');//host detailed view
+
+        Route::post('host/panel/login','HostController@managePanelLogin')->where(['id' => '^[0-9]*$'])->name('host.panel.login');        //manager panel login action
         //News
         Route::get('new/show', 'HomeController@newShowPage')->name('new.show');//新闻列表 news list view
         Route::get('new/{id}', 'HomeController@newPostPage')->name('new.post')->where(['id' => '^[0-9]*$']);//news detailed view

@@ -62,20 +62,26 @@
                                         @endif
                                     </td>
                                     <td class="text-left">
-                                        {{--@switch($host->status)--}}
-                                        {{--@case(1)--}}
-
-                                        {{--@break--}}
-                                        {{--@endswitch--}}
-                                        @if($host->status == 1 && !empty($host->host_url))
-                                            <a href="{{route('host.detailed',['id'=>$host->id])}}"
-                                               class="btn btn-primary btn-sm">信息/管理</a>
-                                            <a href="{{$host->host_url}}" class="btn btn-success btn-sm">主机面板</a>
-                                            <a href="{{route('host.renew',['id'=>$host->id])}}" class="btn btn-warning btn-sm">续费</a>
-                                        @endif
-                                        {{--<button type="button" class="btn btn-primary">Primary</button>--}}
-                                        {{--<button type="button" class="btn btn-secondary">Secondary</button>--}}
-                                        {{--<button type="button" class="btn btn-info">Info</button>--}}
+                                        <div class="dropdown">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            @if($host->status == 1 )
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                <a class="dropdown-item" href="{{route('host.detailed',['id'=>$host->id])}}">信息/管理</a>
+                                                <a class="dropdown-item" href="{{route('host.renew',['id'=>$host->id])}}">续费</a>
+                                                <button class="dropdown-item" onclick="event.preventDefault();
+                                                        document.getElementById('host-panel-{{$host->id}}').submit();" >主机面板</button>
+                                            </div>
+                                            <form id="host-panel-{{$host->id}}"
+                                                  action="{{ route('host.panel.login') }}" method="POST"
+                                                  style="display: none;">
+                                                {{csrf_field()}}
+                                                <input type="hidden" name="id" value="{{$host->id}}">
+                                            </form>
+                                            @endif
+                                        </div>
                                     </td>
                                 </tr>
                         @endforeach

@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-    <meta name="author" content="Creative Tim">
+    <meta name="description" content="{{$websiteSubtitle}}">
+    <meta name="author" content="Creative Tim & MercyCloud">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{$websiteName}} - {{$websiteSubtitle}}</title>
     <!-- Favicon -->
 {{--<link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">--}}
@@ -177,11 +178,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.server.show')}}">
-                        <i class="ni ni-building text-purple"></i> 服务器管理
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{route('admin.prepaid.key.show')}}">
                         <i class="ni ni-credit-card text-blue"></i> 卡密管理
                     </a>
@@ -196,19 +192,36 @@
                         <i class="ni ni-ungroup text-cyan"></i> 用户中心
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.server.show')}}">
+                        <i class="ni ni-building text-purple"></i> 服务器管理
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.diy.page.show')}}">
+                        <i class="ni ni-ruler-pencil text-pink"></i> 自定义页面
+                    </a>
+                </li>
+
             </ul>
             <!-- Divider -->
             <hr class="my-3">
             <!-- Heading -->
             <h6 class="navbar-heading text-muted">帮助</h6>
             <!-- Navigation -->
-            <ul class="navbar-nav mb-md-3">
+            <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">
-                        <i class="ni ni-spaceship"></i> 联系客服
+                    <a class="nav-link" href="https://github.com/MercyCloudTeam/TomatoIDC/issues/new/choose">
+                        <i class="ni ni-spaceship"></i> 更新建议
                     </a>
                 </li>
-
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('admin/log-viewer')}}">
+                        <i class="ni ni-books"></i> 网站日志
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -293,7 +306,7 @@
             <div class="row align-items-center justify-content-xl-between">
                 <div class="col-xl-6">
                     <div class="copyright text-center text-xl-left text-muted">
-                        &copy; 2018 <a href="http://TomatoIDC.com" class="font-weight-bold ml-1"
+                        &copy; 2018 <a href="http://mercycloud.com" class="font-weight-bold ml-1"
                                        target="_blank">TomatoIDC</a>
                     </div>
                 </div>
@@ -335,6 +348,7 @@
 <script src="{{asset('assets/themes/argon/vendor/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{asset('assets/themes/argon/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Optional JS -->
+<script src="{{asset('assets/themes/argon/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('assets/themes/argon/vendor/chart.js/dist/Chart.min.js')}}"></script>
 <script src="{{asset('assets/themes/argon/vendor/chart.js/dist/Chart.extension.js')}}"></script>
 <!-- Argon JS -->

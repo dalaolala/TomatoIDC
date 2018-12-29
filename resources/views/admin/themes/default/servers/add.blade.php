@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label">服务器IP</label>
+                                        <label class="form-control-label">服务器IP/域名</label>
                                         <input type="text" name="ip" class="form-control form-control-alternative"
                                                value="{{old('ip')}}" placeholder="请填写服务器IP">
                                     </div>
@@ -60,11 +60,40 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
+                                        <label class="form-control-label">令牌</label>
+                                        <input type="text" name="token" class="form-control form-control-alternative"
+                                               value="{{old('token')}}" placeholder="服务器Token（根据服务器插件不同填写，可为空）">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">账户</label>
+                                        <input type="text" name="username" class="form-control form-control-alternative"
+                                               value="{{old('username')}}" placeholder="服务器管理账户名称（默认根据插件使用默认端口，可为空）">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label">密码</label>
+                                        <input type="text" name="password" class="form-control form-control-alternative"
+                                               value="{{old('password')}}" placeholder="服务器管理账户密码（根据服务器插件不同填写，可为空）">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
                                         <label class="form-control-label" for="input-email">插件</label>
                                         <select class="custom-select" id="inputGroupSelect02" name="plugin">
                                             @if(!empty($serverPlugin))
                                                 @foreach($serverPlugin as $plugin)
-                                                    <option value="{{$plugin}}">{{$plugin}}</option>
+                                                    <option value="{{$plugin}}" {{ old('plugin') ? old('plugin') == $plugin ?"selected": '' : ''}} >{{$plugin}}</option>
                                                 @endforeach
                                             @endif
                                         </select>
